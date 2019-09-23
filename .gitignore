@@ -1,0 +1,15 @@
+# sample stream files
+*.mp4
+
+# config files
+*.ini
+*.conf
+
+# compiled binaries
+__pycache__
+*.pyc
+venv
+.venv
+
+# IDE Files
+.idea
