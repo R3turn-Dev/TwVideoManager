@@ -21,9 +21,9 @@ project = 'TwVideoManager'
 copyright = '2019, return0927'
 author = 'return0927'
 
-from TwVideoManager import VERSION, DATE
-version = VERSION
-release = VERSION + "-" + DATE
+from TwVideoManager import __VERSION__, __DATE__
+version = __VERSION__
+release = __VERSION__ + "-" + __DATE__
 
 
 # -- General configuration ---------------------------------------------------

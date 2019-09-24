@@ -6,5 +6,7 @@
     :license: LGPL-3.0
 """
 
-VERSION = "0.0.1b"
-DATE = "20190924"
+__VERSION__ = "0.0.1b"
+__DATE__ = "20190924"
+
+from . import gdrive, misc, twitch
