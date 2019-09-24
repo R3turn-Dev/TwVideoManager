@@ -43,3 +43,4 @@ extensions = [
 templates_path = ['_templates']
 
 master_doc = 'index'
+html_theme = 'sphinx_rtd_theme'
