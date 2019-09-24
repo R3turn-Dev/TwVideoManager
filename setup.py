@@ -1,14 +1,15 @@
-from re import search
+import re
 from setuptools import setup
 
 
 # Reading version
 # Reffered https://github.com/Rapptz/discord.py/blob/master/setup.py#L8-L30
 with open("TwVideoManager/__init__.py") as f:
-    version = search(r'^__VERSION__\s=\s[\'"]([\'"]*)[\'"]', f.read()).group(1)
+    data = f.read()
+    version = re.search(r'^__VERSION__\s=\s[\'"]([^\'"]*)[\'"]', data, re.MULTILINE).group(1)
 
     if version.endswith(("a", "b", "rp")):
-        version += search(r'^__DATE__\s=\s[\'"](\d+)[\'"]', f.read()).group(1)
+        version += re.search(r'^__DATE__\s=\s[\'"](\d+)[\'"]', data, re.MULTILINE).group(1)
 
 setup(
     name='TwVideoManager',
