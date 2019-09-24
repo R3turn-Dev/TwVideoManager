@@ -33,6 +33,11 @@ class Video(object):
 
     @staticmethod
     def parse_time(time: str):  # TODO: Doc this parsing func
+        """Parse a date-time string into datetime.datetime object
+
+        :param time: Time string to parse as a date
+        :return datetime: Parsed data as a datetime.datetime object
+        """
         try:
             return datetime.strptime(time, "%Y%m%d_%H-%M-%S.mp4")
         except ValueError:
