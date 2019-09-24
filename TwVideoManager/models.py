@@ -25,7 +25,7 @@ class Video(object):
         return f"""<Video `{self.author}`'s at `{self.date}`>"""
 
     def set_date(self, time: Union[str, datetime]):
-        """Parse and set the record-started time of :class:`VideoFile`"""
+        """Parse and set the record-started time of :class:`TwVideoManager.models.Video`"""
         if isinstance(time, str):
             time = self.parse_time(time)
 
