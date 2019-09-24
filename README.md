@@ -1,3 +1,5 @@
+[![Documentation Status](https://readthedocs.org/projects/twvideomanager/badge/?version=latest)](https://twvideomanager.readthedocs.io/en/latest/?badge=latest)
+
 # TwVideoManager
 > Twitch Video Manager
 
