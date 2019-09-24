@@ -41,3 +41,8 @@ class User(object):  # TODO: Doc this model class
     id: str
     display_name: str
     avatar_uri: Optional[str]
+
+
+@dataclass()
+class Watcher(User):
+    header: User
