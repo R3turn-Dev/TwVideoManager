@@ -17,3 +17,7 @@ venv
 # Doc precompiled
 _build
 docs/make*
+
+# PyPI precompiled
+dist
+*egg-info
