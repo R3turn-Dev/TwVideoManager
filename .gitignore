@@ -13,3 +13,7 @@ venv
 
 # IDE Files
 .idea
+
+# Doc precompiled
+_build
+docs/make*
