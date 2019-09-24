@@ -1,16 +1,20 @@
-.. tools documentation master file, created by
-   sphinx-quickstart on Tue Sep 24 15:03:44 2019.
+.. TwVideoManager documentation master file, created by
+   sphinx-quickstart on Tue Sep 24 19:19:09 2019.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to tools's documentation!
+TwVideoManager - Twitch Video Manager
 =================================
 
+TwVideoManager automatically watches & downloads the live stream into local storage, and
+sends to Google Drive, and then clean up local files. If Discord Webhook or Bot Token is
+provided, also notifies debugging info including storage alerts, network bottle-neck, and
+
+
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
    :caption: Contents:
 
-   tools
 
 
 Indices and tables
