@@ -10,6 +10,7 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
+import re
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
@@ -21,9 +22,16 @@ project = 'TwVideoManager'
 copyright = '2019, return0927'
 author = 'return0927'
 
-from TwVideoManager import __VERSION__, __DATE__
-version = __VERSION__
-release = __VERSION__ + "-" + __DATE__
+
+with open("../TwVideoManager/constants.py") as f:
+    data = f.read()
+    version = re.search(r'^__VERSION__\s=\s[\'"]([^\'"]*)[\'"]', data, re.MULTILINE).group(1)
+
+    if version.endswith(("a", "b", "rp")):
+        version += "-" + re.search(r'^__DATE__\s=\s[\'"](\d+)[\'"]', data, re.MULTILINE).group(1)
+
+
+release = version
 
 
 # -- General configuration ---------------------------------------------------
@@ -42,6 +50,8 @@ extensions = [
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
+
+autodoc_mock_imports = ['python-twitch-twitch', 'twitch', ]
 
 master_doc = 'index'
 html_theme = 'sphinx_rtd_theme'
