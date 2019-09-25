@@ -8,18 +8,11 @@ from datetime import datetime, timedelta
 class RemoteVideoFile(Video):
     """Video files in remote Google Drive
 
-    Variables
-    ---------
-    author: str
-        Streamer ID of the video
-    date: Optional[datetime]
-        Record-Started time of the video
-    id: str
-        Google Drive File id of the video file
-    url: Optional[str]
-        Google Drive Resource url directing the video file
-    parent: Optional[str]
-        Parent directory of the Google Drive file
+    :arg str author: Streamer ID of the video
+    :arg Optional[datetime] date: Record-Started time of the video
+    :arg str id: Google Drive File id of the video file
+    :arg Optional[str] url: Google Drive Resource url directing the video file
+    :arg Optional[str] parent: Parent directory of the Google Drive file
     """
 
     id: str

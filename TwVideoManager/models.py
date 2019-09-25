@@ -1,46 +1,48 @@
 from os import path
 
 # For variable static typing
-from datetime import datetime
+import datetime
 from typing import Optional, Union
 from dataclasses import dataclass
 
 
 @dataclass()
-class Video(object):
+class Video():
     """Basic video structure
 
-    Variables
-    ---------
-    author: str
-        Streamer ID of the video
-    date: Optional[datetime]
-        Record-Started time of the video
+    :var str author: Streamer ID of the video
+    :var Optional[datetime.datetime] date: Record-Started time of the video
     """
 
     author: str
-    date: Optional[datetime]
+    date: Optional[datetime.datetime]
 
     def __repr__(self):
         return f"""<Video `{self.author}`'s at `{self.date}`>"""
 
-    def set_date(self, time: Union[str, datetime]):
-        """Parse and set the record-started time of :class:`TwVideoManager.models.Video`"""
+    def set_date(self, time: Union[str, datetime.datetime]):
+        """Parse and set the record-started time of :class:`Video`"""
         if isinstance(time, str):
             time = self.parse_time(time)
 
         self.date = time
 
     @staticmethod
-    def parse_time(time: str):  # TODO: Doc this parsing func
-        """Parse a date-time string into datetime.datetime object
+    def parse_time(time: str):
+        """Parse a date-time string into :class:`datetime.datetime` object
 
-        :param time: Time string to parse as a date
-        :return datetime: Parsed data as a datetime.datetime object
+        `time` must be matched the pattern `%Y%m%d_%H-%M-%S.mp4` or `%Y%m%d_%H-%M-%S`.
+
+        :param str time: Time string to parse as a date
+        :return datetime.datetime: Parsed data as a :class:`datetime.datetime` object
         """
+
         try:
-            return datetime.strptime(time, "%Y%m%d_%H-%M-%S.mp4")
+            return datetime.datetime.strptime(time, "%Y%m%d_%H-%M-%S.mp4")
         except ValueError:
-            return datetime.strptime(time, "%Y%m%d_%H-%M-%S")
+            try:
+                return datetime.datetime.strptime(time, "%Y%m%d_%H-%M-%S")
+            except ValueError as ex:
+                raise ex
 
 
