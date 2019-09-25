@@ -3,7 +3,7 @@ from twitch.api.users import User
 
 from ..models import Video
 
-from typing import Optional
+from typing import Optional, Union
 from dataclasses import dataclass
 from datetime import datetime, timedelta
 
@@ -30,7 +30,7 @@ class TwitchVideo(Video):
         return f"""<TwitchVideo `{self.vid}` of `{self.author}({self.uid})` at `{self.date}`>"""
 
 @dataclass()
-class User:
+class User(User):
     id: int
     name: str
     display_name: Optional[str]
@@ -46,6 +46,11 @@ class User:
     partnered: Optional[bool]
     twitter_connected: Optional[bool]
     notifications: Optional[dict]
+
+    def __repr__(self):
+        return ("""User(name='{name}', id={id})""" if self.display_name == self.name else
+                """User(name='{name}', display_name='{display_name}' id={id})""")\
+            .format(**self)
 
     @property
     def uid(self):
@@ -81,6 +86,33 @@ class User:
         user: User = client.users.translate_usernames_to_ids(uid)[0]
         return cls.from_user(user)
 
-@dataclass()
+    def make_watcher(self, header: Union[str, User], client: TwitchClient=None):
+        if isinstance(header, str):
+            return Watcher(self, self.from_uid(header, client))
+
+        return Watcher(self, header)
+
+
 class Watcher(User):
     header: User
+
+    def __repr__(self):
+        return """Watcher(`{name}(id={id})` -> {header})""".format(
+            name=self.name if self.name == self.display_name else "{}/{}".format(self.name, self.display_name),
+            id=self.id,
+            header="""`{name}(id={id})`""".format(
+                name=self.header.name if self.header.name == self.header.display_name else
+                "{}/{}".format(self.header.name, self.header.display_name),
+                id=self.header.id,
+                ),
+            )
+
+    def __init__(self, me: User, header: User):
+        super().__init__(**me)
+        self.header: User = header
+
+    @classmethod
+    def from_login(cls, me: str, header: str, client: TwitchClient):
+        me = User.from_uid(me, client)
+        header = User.from_uid(header, client)
+        return Watcher(me, header)
