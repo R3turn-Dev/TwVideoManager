@@ -12,18 +12,11 @@ from dataclasses import dataclass
 class VideoFile(Video):
     """Video files in local data directory
 
-    Variables
-    ---------
-    name: str
-        THe name of the video file
-    extension: str
-        The extension of the video file
-    file: TextIOWrapper
-        File object of the video file
-    author: str
-        Streamer ID of the video file
-    date: Optional[datetime]
-        Record-Started time of the video file
+    :arg str name: The name of the video file
+    :arg str extension: The extension of the video file
+    :arg TextIOWrapper file: File object of the video file
+    :arg str author: Streamer ID of the video file
+    :arg Optional[datetime] date: Record-Started time of the video file
     """
 
     name: str
