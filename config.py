@@ -12,3 +12,7 @@ Example configuration file
 _TWITCH_CLIENT_ID = ""
 _TWITCH_OAUTH_TOKEN = ""
 
+###################
+#      Local      #
+###################
+_SCRIPT_NAME = 'bot.sh'
