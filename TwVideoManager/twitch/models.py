@@ -8,22 +8,13 @@ from datetime import datetime, timedelta
 class TwitchVideo(Video):
     """Twitch video
 
-    Variables
-    ---------
-    author: str
-        Streamer ID of the video
-    uid: int
-        Twitch API ID of the author
-    vid: Optional[int]
-        Twitch API Video ID of the stream video
-    url: Optional[str]
-        Twitch Video link of the stream video (if public and available)
-    date: Optional[datetime]
-        Record-Started time of the video
-    start_time: Optional[datetime]
-        Stream-Started time of the video
-    uptime: Optional[timedelta]
-        Uptime of the stream video
+    :arg str author: Streamer ID of the video
+    :arg int uid: Twitch API ID of the author
+    :arg Optional[int] vid: Twitch API Video ID of the stream video
+    :arg Optional[str] url: Twitch Video link of the stream video (if public and available)
+    :arg Optional[datetime] date: Record-Started time of the video
+    :arg Optional[datetime] start_time: Stream-Started time of the video
+    :arg Optional[timedelta] uptime: Uptime of the stream video
     """
 
     uid: int

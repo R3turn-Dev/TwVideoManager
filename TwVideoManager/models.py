@@ -10,8 +10,8 @@ from dataclasses import dataclass
 class Video():
     """Basic video structure
 
-    :var str author: Streamer ID of the video
-    :var Optional[datetime.datetime] date: Record-Started time of the video
+    :arg str author: Streamer ID of the video
+    :arg Optional[datetime.datetime] date: Record-Started time of the video
     """
 
     author: str
