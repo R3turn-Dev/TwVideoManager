@@ -1,10 +1,10 @@
 import re
-from setuptools import setup
 
+from setuptools import setup
 
 # Reading version
 # Reffered https://github.com/Rapptz/discord.py/blob/master/setup.py#L8-L30
-with open("TwVideoManager/__init__.py") as f:
+with open("TwVideoManager/constants.py") as f:
     data = f.read()
     version = re.search(r'^__VERSION__\s=\s[\'"]([^\'"]*)[\'"]', data, re.MULTILINE).group(1)
 
@@ -22,6 +22,7 @@ with open("requirements.txt") as f:
 setup(
     name='TwVideoManager',
     version=version,
+    install_requires=requirements,
     packages=['TwVideoManager'],
     requirements=requirements,
     url='https://github.com/R3turn-Dev/TwVideoManager/',

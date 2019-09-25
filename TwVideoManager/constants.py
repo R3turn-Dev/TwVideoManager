@@ -1,0 +1,4 @@
+__VERSION__ = "0.0.1b"
+__DATE__ = "20190924"
+
+_DEFAULT_SCRIPT_NAME = 'bot.sh'
