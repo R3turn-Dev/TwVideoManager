@@ -10,7 +10,7 @@ from ..constants import _FFPROBE_EXTRACT
 
 @dataclass()
 class MP4Parser:
-    ffprobe_path: str = './ffprobe.exe' if platform() == 'Windows' else './ffprobe'
+    ffprobe_path: str = './ffprobe.exe' if 'Windows' in platform() else './ffprobe'
 
     def parse(self, path: Union[str, File]) -> dict:
         if isinstance(path, File):  # If File object, convert into absolute path
