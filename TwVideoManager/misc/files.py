@@ -1,60 +1,8 @@
 import os
-from dataclasses import dataclass
-from typing import List, Any, Optional, Union
+from typing import List, Union
 
+from .models import Directory, File
 from ..constants import _DEFAULT_SCRIPT_NAME, _EXTENSION_VIDEO
-
-
-@dataclass()
-class File:
-    name: str
-    path: str
-    extension: str
-
-    def __init__(self, name: str, path: str):
-        self.name, self.extension = os.path.splitext(name)
-        self.path = path
-
-    def __repr__(self) -> str:
-        return """File('{}{}')""".format(self.name, self.extension)
-
-    def __pretty__(self) -> str:
-        return self.name
-
-
-@dataclass()
-class Directory:
-    name: str
-    path: str
-    parent: Any
-    siblings: Optional[List[File]]
-
-    @property
-    def subdirectories(self) -> list:
-        return [*filter(lambda x: isinstance(x, Directory), self.siblings)]
-
-    @property
-    def subfiles(self) -> List[File]:
-        return [*filter(lambda x: isinstance(x, File), self.siblings)]
-
-    @property
-    def names(self) -> List[str]:
-        return [x.name for x in self.siblings]
-
-    def __pretty__(self, depth=0) -> str:  # TODO: prettify printing
-        out = ''
-
-        if depth == 0:
-            out += self.name + '\n'
-
-            for dir in self.subdirectories:
-                out += dir.__pretty__(depth=depth+1) + '\n'
-
-        else:
-            return '│  ' * (depth - 1) + '├─' + self.name
-
-
-        return out
 
 
 class LocalFinder:
