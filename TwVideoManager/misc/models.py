@@ -1,8 +1,8 @@
+import os
 from _io import BufferedReader
 from dataclasses import dataclass
 # For variable static typing
 from datetime import datetime
-from os import path
 from typing import Any, List, Optional, Union
 
 from ..models import Video
@@ -15,7 +15,7 @@ class File:
     extension: str
 
     def __init__(self, name: str, path: str):
-        self.name, self.extension = path.splitext(name)
+        self.name, self.extension = os.path.splitext(name)
         self.path = path
 
     def __repr__(self) -> str:
@@ -84,7 +84,7 @@ class VideoFile(Video, File):
             if file.mode != "rb":
                 raise TypeError("Video file must be opened with binary mode.")
 
-            full_path = path.abspath(file.name).replace("\\", "/")
+            full_path = os.path.abspath(file.name).replace("\\", "/")
             name: str= full_path.split("/")[-1]
 
             if "." not in name:
@@ -93,7 +93,7 @@ class VideoFile(Video, File):
                 extension, name = name[::-1].split(".", 1)
                 name, extension = name[::-1], extension[::-1]
 
-            vid_author: str = path.dirname(file.name).replace("\\", "/").split("/")[-1]
+            vid_author: str = os.path.dirname(file.name).replace("\\", "/").split("/")[-1]
             vid_date: datetime = VideoFile.parse_time(name)
 
             return VideoFile(name=name, extension=extension, file=file, author=author or vid_author, date=date or vid_date)
@@ -103,7 +103,7 @@ class VideoFile(Video, File):
 
             name = file.name
             extension = file.extension
-            file: BufferedReader = open(path.join(file.path, file.name), 'rb')
+            file: BufferedReader = open(os.path.join(file.path, file.name), 'rb')
 
             return VideoFile(author, date, name, extension, file)
         else:
