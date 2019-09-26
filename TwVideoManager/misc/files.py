@@ -23,15 +23,20 @@ class LocalFinder:
 
 
     @property
-    def dir(self) -> Directory:  # TODO: Doc
-        """
+    def dir(self) -> Directory:
+        """Return the Directory indicates :attr:`LocalFinder.video_dir` containing
+        sub-directories and sub-files.
 
-        :return Directory:
+        The video directory contains sub-directories, whose names are usually channel name.
+        These sub-directories and sub-directories' sub-files would be managed to share on
+        remote storage such as Google Drive.
+
+        :return Directory: Video directory as a :class:`Directory`
         """
         return Directory(os.path.basename(self.video_dir), os.path.dirname(self.video_dir), None, self.wrapper(self.video_dir))
 
     @property
-    def stream_dir(self) -> List[Directory]:  # TODO: Doc
+    def stream_dir(self) -> List[Directory]:
         """
 
         :return List[Directory]: returns the stream-saving folders including script file.

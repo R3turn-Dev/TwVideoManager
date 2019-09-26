@@ -10,6 +10,13 @@ from ..models import Video
 
 @dataclass()
 class File:
+    """Wrap class for sub-files on :class:`Directory`.
+
+    :arg str name: the name of the file (without extension).
+    :arg str path: the path of the file (with full filename with the extension).
+    :arg str extension: the extension of the file, starting with a dot.
+        Can be `None` if the file extension is unexplicit.
+    """
     name: str
     path: str
     extension: str
@@ -27,6 +34,14 @@ class File:
 
 @dataclass()
 class Directory:
+    """Wrap class for sub-files and sub-directories.
+
+    :arg str name: the name of the directory.
+    :arg str path: the path of the directory.
+    :arg Directory parent: the parent :class:`Directory` containing this directory.
+    :arg List[File, Directory] siblings: the sub-directories and sub-files, 
+        and each is wrapped with the wrapping class.
+    """
     name: str
     path: str
     parent: Any
