@@ -16,3 +16,4 @@ _TWITCH_OAUTH_TOKEN = ""
 #      Local      #
 ###################
 _SCRIPT_NAME = 'bot.sh'
+_FFPROBE_PATH = 'ffprobe.exe'  # If Windows and ffprobe is with script file.
