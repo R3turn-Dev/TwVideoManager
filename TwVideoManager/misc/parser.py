@@ -14,7 +14,7 @@ class MP4Parser:
 
     def parse(self, path: Union[str, File]) -> dict:
         if isinstance(path, File):  # If File object, convert into absolute path
-            path = path.path + path.name + path.extension
+            path = path.path
 
         b = subprocess.check_output(_FFPROBE_EXTRACT.format(path=self.ffprobe_path, file=path))
         j = loads(b.decode())['format']
