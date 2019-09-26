@@ -2,16 +2,21 @@ import os
 from dataclasses import dataclass
 from typing import List, Any, Optional, Union
 
-from ..constants import _DEFAULT_SCRIPT_NAME
+from ..constants import _DEFAULT_SCRIPT_NAME, _EXTENSION_VIDEO
 
 
 @dataclass()
 class File:
     name: str
     path: str
+    extension: str
+
+    def __init__(self, name: str, path: str):
+        self.name, self.extension = os.path.splitext(name)
+        self.path = path
 
     def __repr__(self) -> str:
-        return """File('{}')""".format(self.name)
+        return """File('{}{}')""".format(self.name, self.extension)
 
     def __pretty__(self) -> str:
         return self.name
@@ -84,6 +89,23 @@ class LocalFinder:
         :return List[Directory]: returns the stream-saving folders including script file.
         """
         return [*filter(lambda x: isinstance(x, Directory) and self.has_script(x), self.dir.subdirectories)]
+
+    @property
+    def video_files(self) -> List[File]:
+        """returns all video files in the stream directories.
+
+        The video files' extension must be included in pre-filled extension set (see `TwVideoManager.constants.
+        _EXTENSION_VIDEO`.
+
+        :return List[File]: the video files in stream directories.
+        """
+        l = []
+        for directory in self.stream_dir:
+            for file in directory.subfiles:
+                if file.extension in _EXTENSION_VIDEO:
+                    l.append(file)
+
+        return l
 
     @classmethod
     def wrapper(cls, path: str) -> List[Union[File, Directory]]:
