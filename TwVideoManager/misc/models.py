@@ -39,7 +39,7 @@ class Directory:
     :arg str name: the name of the directory.
     :arg str path: the path of the directory.
     :arg Directory parent: the parent :class:`Directory` containing this directory.
-    :arg List[File, Directory] siblings: the sub-directories and sub-files, 
+    :arg List[File,Directory] siblings: the sub-directories and sub-files,
         and each is wrapped with the wrapping class.
     """
     name: str
