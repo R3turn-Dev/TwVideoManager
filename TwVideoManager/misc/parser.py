@@ -2,7 +2,9 @@ import subprocess
 from dataclasses import dataclass
 from json import loads
 from platform import platform
+from typing import Union
 
+from .models import File
 from ..constants import _FFPROBE_EXTRACT
 
 
@@ -10,7 +12,10 @@ from ..constants import _FFPROBE_EXTRACT
 class MP4Parser:
     ffprobe_path: str = './ffprobe.exe' if platform() == 'Windows' else './ffprobe'
 
-    def parse(self, path: str) -> dict:
+    def parse(self, path: Union[str, File]) -> dict:
+        if isinstance(path, File):  # If File object, convert into absolute path
+            path = path.path + path.name + path.extension
+
         b = subprocess.check_output(_FFPROBE_EXTRACT.format(path=self.ffprobe_path, file=path))
         j = loads(b.decode())['format']
         return j
