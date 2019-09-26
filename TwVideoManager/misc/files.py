@@ -87,7 +87,7 @@ class LocalFinder:
         """
         find = False
         for file in target.subfiles:
-            if file.name == self.script_name:
+            if file.name + file.extension == self.script_name:
                 find = True
                 break
         return find
