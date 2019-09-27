@@ -10,9 +10,19 @@ from ..constants import _FFPROBE_EXTRACT
 
 @dataclass()
 class MP4Parser:
+    """:class:`MP4Parser` fetches mp4 file meta-data like length, frameratea, or screen resolution.
+
+    :var str ffprobe_path: the path to the ffprobe. Default value is set based on aaaumption
+        that the ffprobe file is on the working directory
+    """
     ffprobe_path: str = './ffprobe.exe' if 'Windows' in platform() else './ffprobe'
 
     def parse(self, path: Union[str, File]) -> dict:
+        """Parse the given video file and returns as :class:`dict`
+
+        :param Union[str,File] path: The path to the file to parse
+        :return dict: Parsed sata as a :class:`dict`
+        """
         if isinstance(path, File):  # If File object, convert into absolute path
             path = path.path
 
