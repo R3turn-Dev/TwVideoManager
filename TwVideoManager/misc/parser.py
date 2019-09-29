@@ -10,7 +10,7 @@ from ..constants import _FFPROBE_EXTRACT
 
 @dataclass()
 class MP4Parser:
-    """:class:`MP4Parser` fetches mp4 file meta-data like length, frameratea, or screen resolution.
+    """:class:`MP4Parser` fetches mp4 file meta-data like length, framerate, or screen resolution.
 
     :var str ffprobe_path: the path to the ffprobe. Default value is set based on assumption
         that the ffprobe file is on the working directory
