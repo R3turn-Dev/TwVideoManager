@@ -14,22 +14,35 @@ class File:
 
     :arg str name: the name of the file (without extension).
     :arg str path: the path of the file (with full filename with the extension).
+    :arg int size: the size of the file (in Bytes)
+    :arg Any meta: metadata of the file.
     :arg str extension: the extension of the file, starting with a dot.
         Can be `None` if the file extension is unexplicit.
     """
     name: str
     path: str
+    _size: Optional[int]
+    meta: Any
     extension: str
 
-    def __init__(self, name: str, path: str):
+    def __init__(self, name: str, path: str, size=None, meta: Any=''):
         self.name, self.extension = os.path.splitext(name)
         self.path = path
+        self._size = size
+        self.meta = meta
 
     def __repr__(self) -> str:
         return """File('{}{}')""".format(self.name, self.extension)
 
     def __pretty__(self) -> str:
         return self.name
+
+    @property
+    def size(self) -> int:
+        if not isinstance(self._size, int):
+            self._size = os.path.getsize(self.path)
+
+        return self._size
 
 
 @dataclass()
@@ -58,6 +71,10 @@ class Directory:
     @property
     def names(self) -> List[str]:
         return [x.name for x in self.siblings]
+
+    @property
+    def size(self) -> int:
+        return sum(x.size for x in self.siblings)
 
     def __pretty__(self, depth=0) -> str:  # TODO: prettify printing
         out = ''
