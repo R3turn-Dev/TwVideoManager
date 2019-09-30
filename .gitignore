@@ -4,6 +4,7 @@
 # config files
 *.ini
 *.conf
+*.json
 
 # compiled binaries
 __pycache__
